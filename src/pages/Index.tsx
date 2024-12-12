@@ -3,6 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserPlus, Search, MessageSquare, BookOpen, Clock, Users, ArrowRight, Globe, Microscope, Database } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import ProfileCard from "@/components/ProfileCard";
 import ExploreSection from "@/components/ExploreSection";
 import UserMenu from "@/components/UserMenu";
@@ -10,6 +13,7 @@ import { useState } from "react";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("explore");
+  const [showCreateProjectDialog, setShowCreateProjectDialog] = useState(false);
 
   const projects = [
     {
@@ -40,6 +44,13 @@ const Index = () => {
       icon: Microscope
     }
   ];
+
+  const handleCreateProject = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Creating new project...");
+    // Here you would typically handle the form submission
+    setShowCreateProjectDialog(false);
+  };
 
   return (
     <div className="container mx-auto px-4 py-6 min-h-screen pb-20">
@@ -150,9 +161,82 @@ const Index = () => {
                     <h4 className="text-sm font-medium leading-none">Your Projects</h4>
                     <p className="text-sm text-muted-foreground">Manage your research projects and collaborations</p>
                   </div>
-                  <Button variant="outline" size="sm">
-                    Create Project <BookOpen className="ml-2 h-4 w-4" />
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" size="sm">
+                        Create Project <BookOpen className="ml-2 h-4 w-4" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[600px]">
+                      <DialogHeader>
+                        <DialogTitle>Create New Research Project</DialogTitle>
+                        <DialogDescription>
+                          Fill in the details below to create a new research project and start collaborating.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <form onSubmit={handleCreateProject} className="space-y-6">
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="projectTitle">Project Title</Label>
+                            <Input
+                              id="projectTitle"
+                              placeholder="Enter project title"
+                              required
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="institution">Institution</Label>
+                            <Input
+                              id="institution"
+                              placeholder="Enter institution name"
+                              required
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="description">Project Description</Label>
+                            <Textarea
+                              id="description"
+                              placeholder="Describe your research project..."
+                              className="min-h-[100px]"
+                              required
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="tags">Tags (comma-separated)</Label>
+                            <Input
+                              id="tags"
+                              placeholder="e.g., Machine Learning, Data Analysis, Climate Science"
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="openings">Number of Openings</Label>
+                            <Input
+                              id="openings"
+                              type="number"
+                              min="1"
+                              placeholder="Enter number of positions"
+                              required
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="flex justify-end gap-4">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setShowCreateProjectDialog(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button type="submit">Create Project</Button>
+                        </div>
+                      </form>
+                    </DialogContent>
+                  </Dialog>
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
