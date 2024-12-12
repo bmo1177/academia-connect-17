@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import ExploreFilters from "./explore/ExploreFilters";
+import FeaturedProjects from "./explore/FeaturedProjects";
 import { mockProfiles } from "@/data/mockProfiles";
 
 const ExploreSection = () => {
@@ -82,6 +83,8 @@ const ExploreSection = () => {
           </Card>
         ))}
       </div>
+
+      <FeaturedProjects />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl">
