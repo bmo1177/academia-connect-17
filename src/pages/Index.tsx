@@ -1,47 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserPlus, Search, MessageSquare, BookOpen, Clock, Users, ArrowRight, Globe, Microscope, Database } from "lucide-react";
+import { UserPlus, Search, MessageSquare, BookOpen } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import ProfileCard from "@/components/ProfileCard";
 import ExploreSection from "@/components/ExploreSection";
 import UserMenu from "@/components/UserMenu";
 import CreateProjectDialog from "@/components/dialogs/CreateProjectDialog";
+import MessagesTab from "@/components/messages/MessagesTab";
 import { useState } from "react";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("explore");
   const [showCreateProjectDialog, setShowCreateProjectDialog] = useState(false);
-
-  const projects = [
-    {
-      title: "Global Climate Data Analysis",
-      lead: "Dr. Emma Roberts",
-      institution: "Climate Research Institute",
-      description: "Analyzing global temperature patterns using machine learning",
-      tags: ["Climate Science", "Data Analysis", "Machine Learning"],
-      openings: 3,
-      icon: Globe
-    },
-    {
-      title: "Quantum Computing Applications",
-      lead: "Prof. James Wilson",
-      institution: "Quantum Technologies Lab",
-      description: "Developing algorithms for quantum computers in medical research",
-      tags: ["Quantum Computing", "Medical Research", "Algorithm Development"],
-      openings: 2,
-      icon: Database
-    },
-    {
-      title: "Biomedical Imaging Innovation",
-      lead: "Dr. Lisa Chen",
-      institution: "Medical Research Center",
-      description: "Advanced imaging techniques for early disease detection",
-      tags: ["Biomedical", "Imaging", "AI"],
-      openings: 4,
-      icon: Microscope
-    }
-  ];
 
   return (
     <div className="container mx-auto px-4 py-6 min-h-screen pb-20">
@@ -106,38 +77,7 @@ const Index = () => {
         </TabsContent>
 
         <TabsContent value="messages">
-          <Card>
-            <CardHeader>
-              <CardTitle>Messages</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-medium leading-none">Recent Messages</h4>
-                    <p className="text-sm text-muted-foreground">Start conversations with your connections</p>
-                  </div>
-                  <Button variant="outline" size="sm">
-                    New Message <MessageSquare className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-
-                <div className="rounded-lg border">
-                  <div className="p-6 text-center">
-                    <MessageSquare className="mx-auto h-12 w-12 text-muted-foreground/50" />
-                    <h3 className="mt-4 text-lg font-semibold">Start a Conversation</h3>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Connect with researchers to discuss collaborations and share ideas
-                    </p>
-                    <div className="mt-4 space-x-4">
-                      <Button>Find Researchers</Button>
-                      <Button variant="outline">View Connections</Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <MessagesTab />
         </TabsContent>
 
         <TabsContent value="projects">
