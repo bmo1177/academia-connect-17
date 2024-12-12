@@ -4,15 +4,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserPlus, Search, MessageSquare, BookOpen } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import ExploreSection from "@/components/ExploreSection";
+import UserMenu from "@/components/UserMenu";
 
 const Index = () => {
   return (
     <div className="container mx-auto px-4 py-6 min-h-screen">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold text-center mb-4">Academia Connect</h1>
-        <p className="text-center text-muted-foreground">
-          Connect with researchers worldwide and build your academic network
-        </p>
+      <header className="mb-8 flex justify-between items-center">
+        <div>
+          <h1 className="text-4xl font-bold text-center mb-4">Academia Connect</h1>
+          <p className="text-center text-muted-foreground">
+            Connect with researchers worldwide and build your academic network
+          </p>
+        </div>
+        <UserMenu />
       </header>
 
       <Tabs defaultValue="explore" className="w-full">
