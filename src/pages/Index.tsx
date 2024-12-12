@@ -11,9 +11,9 @@ const Index = () => {
     <div className="container mx-auto px-4 py-6 min-h-screen pb-20">
       <header className="mb-8 flex justify-between items-center">
         <div>
-          <h1 className="text-4xl font-bold text-center mb-4">Academia Connect</h1>
+          <h1 className="text-4xl font-bold text-center mb-4">Consortio</h1>
           <p className="text-center text-muted-foreground">
-            Connect with researchers worldwide and build your academic network
+            Global teams for global solutions
           </p>
         </div>
         <UserMenu />
