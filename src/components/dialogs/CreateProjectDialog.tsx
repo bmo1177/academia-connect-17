@@ -74,6 +74,18 @@ const CreateProjectDialog = ({ open, onOpenChange }: CreateProjectDialogProps) =
                 required
               />
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="inviteAcademics">Invite Academics</Label>
+              <Textarea
+                id="inviteAcademics"
+                placeholder="Enter email addresses of academics to invite (one per line)"
+                className="min-h-[80px]"
+              />
+              <p className="text-sm text-muted-foreground">
+                Enter one email address per line. Invitees will receive an invitation to join your project.
+              </p>
+            </div>
           </div>
           
           <div className="flex justify-end gap-4">
