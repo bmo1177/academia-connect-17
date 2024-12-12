@@ -11,13 +11,35 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 const ExploreSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProfile, setSelectedProfile] = useState<any>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [metricFilter, setMetricFilter] = useState<string>("citations");
+  const [selectedFaculties, setSelectedFaculties] = useState<string[]>([]);
 
-  // Temporary mock data - will be replaced with Supabase data
+  const faculties = [
+    "Creative Arts",
+    "Arts",
+    "Business",
+    "Law",
+    "Education",
+    "Science",
+    "Technology",
+    "Engineering",
+    "Mathematics"
+  ];
+
   const mockProfiles = [
     {
       name: "Dr. Sarah Johnson",
@@ -116,20 +138,81 @@ const ExploreSection = () => {
     setIsDialogOpen(true);
   };
 
+  const filteredProfiles = mockProfiles
+    .filter(profile => {
+      // Filter by search query
+      const matchesSearch = profile.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        profile.institution.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        profile.interests.some(interest => interest.toLowerCase().includes(searchQuery.toLowerCase()));
+
+      // Filter by faculty if any are selected
+      const matchesFaculty = selectedFaculties.length === 0 || 
+        profile.interests.some(interest => selectedFaculties.includes(interest));
+
+      return matchesSearch && matchesFaculty;
+    })
+    .sort((a, b) => {
+      // Sort by selected metric
+      if (metricFilter === "citations") {
+        return b.scholarMetrics.citations - a.scholarMetrics.citations;
+      } else if (metricFilter === "hIndex") {
+        return b.scholarMetrics.hIndex - a.scholarMetrics.hIndex;
+      } else {
+        return b.scholarMetrics.i10Index - a.scholarMetrics.i10Index;
+      }
+    });
+
   return (
     <div className="space-y-6">
-      <div className="relative">
-        <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search by name, institution, or research interest..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10"
-        />
+      <div className="space-y-4">
+        <div className="relative">
+          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search by name, institution, or research interest..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+
+        <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
+          <Select
+            value={metricFilter}
+            onValueChange={setMetricFilter}
+          >
+            <SelectTrigger className="w-full md:w-[200px]">
+              <SelectValue placeholder="Sort by metric" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="citations">Citations</SelectItem>
+              <SelectItem value="hIndex">h-index</SelectItem>
+              <SelectItem value="i10Index">i10-index</SelectItem>
+            </SelectContent>
+          </Select>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-4 border rounded-lg flex-grow">
+            {faculties.map((faculty) => (
+              <div key={faculty} className="flex items-center space-x-2">
+                <Checkbox
+                  id={faculty}
+                  checked={selectedFaculties.includes(faculty)}
+                  onCheckedChange={(checked) => {
+                    setSelectedFaculties(prev =>
+                      checked
+                        ? [...prev, faculty]
+                        : prev.filter(f => f !== faculty)
+                    );
+                  }}
+                />
+                <Label htmlFor={faculty} className="text-sm">{faculty}</Label>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {mockProfiles.map((profile, index) => (
+        {filteredProfiles.map((profile, index) => (
           <Card key={index} className="overflow-hidden">
             <CardContent className="p-0">
               <ProfileCard {...profile} />
