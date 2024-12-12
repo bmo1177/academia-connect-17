@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserPlus, Search, MessageSquare, BookOpen } from "lucide-react";
+import { UserPlus, Search, MessageSquare, BookOpen, ArrowRight, Users, Clock, Lock } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import ProfileCard from "@/components/ProfileCard";
 import ExploreSection from "@/components/ExploreSection";
@@ -9,6 +9,28 @@ import UserMenu from "@/components/UserMenu";
 import CreateProjectDialog from "@/components/dialogs/CreateProjectDialog";
 import MessagesTab from "@/components/messages/MessagesTab";
 import { useState } from "react";
+
+// Mock projects data
+const projects = [
+  {
+    title: "Climate Change Impact Study",
+    description: "Research on global climate patterns and their effects on ecosystems",
+    lead: "Dr. Sarah Johnson",
+    institution: "Stanford University",
+    tags: ["Climate Science", "Environmental Studies", "Data Analysis"],
+    openings: 3,
+    icon: BookOpen
+  },
+  {
+    title: "Quantum Computing Research",
+    description: "Development of quantum algorithms for optimization problems",
+    lead: "Prof. Michael Chen",
+    institution: "MIT",
+    tags: ["Quantum Physics", "Computer Science", "Mathematics"],
+    openings: 2,
+    icon: BookOpen
+  }
+];
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("explore");
