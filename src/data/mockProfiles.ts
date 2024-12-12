@@ -88,5 +88,50 @@ export const mockProfiles = [
       hIndex: 48,
       i10Index: 82
     }
+  },
+  {
+    name: "Dr. Sophia Martinez",
+    title: "Research Director of AI Ethics",
+    institution: "ETH Zürich",
+    interests: ["AI Ethics", "Machine Learning", "Philosophy of Technology", "Creative Arts"],
+    imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    biography: "Leading researcher in AI ethics with a focus on responsible AI development. Pioneer in developing ethical frameworks for AI deployment in creative industries.",
+    qualifications: ["Ph.D. Computer Science & Philosophy, Oxford", "M.Phil. Technology Ethics, Cambridge", "B.A. Philosophy, Yale"],
+    experience: ["Research Director at ETH Zürich (2019-present)", "Senior AI Ethicist at DeepMind (2016-2019)", "Research Fellow at Oxford Internet Institute (2014-2016)"],
+    scholarMetrics: {
+      citations: 11250,
+      hIndex: 42,
+      i10Index: 68
+    }
+  },
+  {
+    name: "Prof. Alexander Kumar",
+    title: "Head of Quantum Computing Research",
+    institution: "National University of Singapore",
+    interests: ["Quantum Computing", "Mathematics", "Cryptography", "Technology"],
+    imageUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d",
+    biography: "Pioneering researcher in quantum computing applications for cryptography and data security. Led breakthrough discoveries in quantum error correction.",
+    qualifications: ["Ph.D. Quantum Physics, Berkeley", "M.S. Mathematics, Princeton", "B.Tech. Computer Science, IIT Bombay"],
+    experience: ["Head of Quantum Computing at NUS (2017-present)", "Principal Researcher at IBM Quantum (2014-2017)", "Associate Professor at Tsinghua University (2010-2014)"],
+    scholarMetrics: {
+      citations: 16780,
+      hIndex: 46,
+      i10Index: 75
+    }
+  },
+  {
+    name: "Dr. Isabella Romano",
+    title: "Director of Sustainable Engineering",
+    institution: "Technical University of Munich",
+    interests: ["Sustainable Engineering", "Green Technology", "Environmental Science", "Engineering"],
+    imageUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956",
+    biography: "Leading expert in sustainable engineering and green technology implementation. Developed innovative solutions for reducing industrial carbon footprint.",
+    qualifications: ["Ph.D. Environmental Engineering, TU Munich", "M.Eng. Sustainable Systems, ETH Zürich", "B.Eng. Chemical Engineering, Politecnico di Milano"],
+    experience: ["Director at TU Munich (2018-present)", "Lead Engineer at Siemens Green Tech (2015-2018)", "Research Scientist at Max Planck Institute (2012-2015)"],
+    scholarMetrics: {
+      citations: 9840,
+      hIndex: 36,
+      i10Index: 52
+    }
   }
 ];
