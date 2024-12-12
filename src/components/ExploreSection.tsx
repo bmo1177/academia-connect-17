@@ -23,6 +23,34 @@ const ExploreSection = () => {
       institution: "MIT",
       interests: ["Quantum Computing", "Algorithms", "Data Science"],
       imageUrl: "/placeholder.svg"
+    },
+    {
+      name: "Dr. Elena Rodriguez",
+      title: "Assistant Professor of Neuroscience",
+      institution: "Harvard Medical School",
+      interests: ["Brain-Computer Interfaces", "Neural Networks", "Cognitive Science"],
+      imageUrl: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7"
+    },
+    {
+      name: "Prof. David Kim",
+      title: "Senior Researcher",
+      institution: "Seoul National University",
+      interests: ["Robotics", "Computer Vision", "Human-Computer Interaction"],
+      imageUrl: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952"
+    },
+    {
+      name: "Dr. Maya Patel",
+      title: "Lead Research Scientist",
+      institution: "University of Cambridge",
+      interests: ["Sustainable Energy", "Materials Science", "Green Technology"],
+      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+    },
+    {
+      name: "Prof. James Wilson",
+      title: "Department Chair",
+      institution: "University of Toronto",
+      interests: ["Bioinformatics", "Genomics", "Systems Biology"],
+      imageUrl: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
     }
   ];
 
