@@ -68,6 +68,40 @@ const featuredProjects = [
     duration: "3 years",
     funding: "Fully funded",
     deadline: "October 1, 2024"
+  },
+  {
+    id: 4,
+    title: "Climate Change Impact on Marine Ecosystems",
+    institution: "Woods Hole Oceanographic Institution",
+    shortDescription: "Studying the effects of global warming on ocean biodiversity",
+    fullDescription: "Comprehensive research project investigating the impact of climate change on marine ecosystems, focusing on coral reef resilience and adaptation strategies for marine species.",
+    requirements: [
+      "PhD in Marine Biology, Environmental Science, or related field",
+      "Experience with marine ecosystem modeling",
+      "Proficiency in data analysis and statistical methods",
+      "Background in climate science"
+    ],
+    positions: 3,
+    duration: "4 years",
+    funding: "Fully funded",
+    deadline: "March 15, 2025"
+  },
+  {
+    id: 5,
+    title: "Next-Generation Battery Technology",
+    institution: "Max Planck Institute for Energy Research",
+    shortDescription: "Developing advanced energy storage solutions",
+    fullDescription: "Innovative research project focused on developing high-capacity, sustainable battery technologies using novel materials and advanced manufacturing processes.",
+    requirements: [
+      "PhD in Materials Science, Chemical Engineering, or related field",
+      "Experience with battery technology and electrochemistry",
+      "Strong background in materials characterization",
+      "Knowledge of sustainable manufacturing processes"
+    ],
+    positions: 2,
+    duration: "3 years",
+    funding: "Fully funded",
+    deadline: "January 31, 2025"
   }
 ];
 
