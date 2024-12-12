@@ -17,6 +17,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink, Building2, Users } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from 'embla-carousel-react';
 
 const featuredProjects = [
@@ -74,12 +75,15 @@ const FeaturedProjects = () => {
   const [selectedProject, setSelectedProject] = useState<typeof featuredProjects[0] | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
-  const [emblaRef] = useEmblaCarousel({
-    align: 'start',
-    loop: true,
-    skipSnaps: false,
-    dragFree: true,
-  });
+  
+  const [emblaRef] = useEmblaCarousel(
+    { 
+      loop: true,
+      align: "start",
+      skipSnaps: false,
+    },
+    [Autoplay({ delay: 4000, stopOnInteraction: true })]
+  );
 
   const handleApply = (projectId: number) => {
     console.log("Applying for project:", projectId);
@@ -94,49 +98,56 @@ const FeaturedProjects = () => {
     <div className="space-y-6 py-8">
       <h2 className="text-2xl font-bold">Featured Research Projects</h2>
       <div className="relative">
-        <Carousel
-          opts={{
-            align: 'start',
-            loop: true,
-          }}
-          className="w-full max-w-5xl mx-auto"
-        >
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {featuredProjects.map((project, index) => (
-              <CarouselItem key={project.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                <div className="h-full">
-                  <Card className="h-full">
-                    <CardContent className="p-6 space-y-4">
-                      <h3 className="font-semibold text-lg line-clamp-2">{project.title}</h3>
-                      <div className="flex items-center text-sm text-muted-foreground">
-                        <Building2 className="mr-2 h-4 w-4 flex-shrink-0" />
-                        <span className="line-clamp-1">{project.institution}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground line-clamp-3">
-                        {project.shortDescription}
-                      </p>
-                      <Button
-                        variant="outline"
-                        className="w-full mt-auto"
-                        onClick={() => {
-                          setSelectedProject(project);
-                          setIsDialogOpen(true);
-                        }}
-                      >
-                        <ExternalLink className="mr-2 h-4 w-4" />
-                        More Information
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="hidden md:block">
-            <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2" />
-            <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2" />
-          </div>
-        </Carousel>
+        <div className="overflow-hidden" ref={emblaRef}>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full max-w-5xl mx-auto"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {featuredProjects.map((project, index) => (
+                <CarouselItem 
+                  key={project.id} 
+                  className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
+                >
+                  <div className="h-full">
+                    <Card className="h-full">
+                      <CardContent className="p-6 space-y-4">
+                        <h3 className="font-semibold text-lg line-clamp-2">
+                          {project.title}
+                        </h3>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Building2 className="mr-2 h-4 w-4 flex-shrink-0" />
+                          <span className="line-clamp-1">{project.institution}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground line-clamp-3">
+                          {project.shortDescription}
+                        </p>
+                        <Button
+                          variant="outline"
+                          className="w-full mt-auto"
+                          onClick={() => {
+                            setSelectedProject(project);
+                            setIsDialogOpen(true);
+                          }}
+                        >
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          More Information
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden md:block">
+              <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2" />
+              <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2" />
+            </div>
+          </Carousel>
+        </div>
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
