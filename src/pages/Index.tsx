@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserPlus, Search, MessageSquare, BookOpen, Clock, Users, ArrowRight } from "lucide-react";
+import { UserPlus, Search, MessageSquare, BookOpen, Clock, Users, ArrowRight, Globe, Microscope, Database } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import ProfileCard from "@/components/ProfileCard";
 import ExploreSection from "@/components/ExploreSection";
 import UserMenu from "@/components/UserMenu";
@@ -9,6 +10,36 @@ import { useState } from "react";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("explore");
+
+  const projects = [
+    {
+      title: "Global Climate Data Analysis",
+      lead: "Dr. Emma Roberts",
+      institution: "Climate Research Institute",
+      description: "Analyzing global temperature patterns using machine learning",
+      tags: ["Climate Science", "Data Analysis", "Machine Learning"],
+      openings: 3,
+      icon: Globe
+    },
+    {
+      title: "Quantum Computing Applications",
+      lead: "Prof. James Wilson",
+      institution: "Quantum Technologies Lab",
+      description: "Developing algorithms for quantum computers in medical research",
+      tags: ["Quantum Computing", "Medical Research", "Algorithm Development"],
+      openings: 2,
+      icon: Database
+    },
+    {
+      title: "Biomedical Imaging Innovation",
+      lead: "Dr. Lisa Chen",
+      institution: "Medical Research Center",
+      description: "Advanced imaging techniques for early disease detection",
+      tags: ["Biomedical", "Imaging", "AI"],
+      openings: 4,
+      icon: Microscope
+    }
+  ];
 
   return (
     <div className="container mx-auto px-4 py-6 min-h-screen pb-20">
@@ -143,7 +174,56 @@ const Index = () => {
                       <p className="text-sm text-center text-muted-foreground">
                         Discover and join ongoing research projects
                       </p>
-                      <Button variant="outline" className="w-full">Browse Projects</Button>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" className="w-full">Browse Projects</Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+                          <DialogHeader>
+                            <DialogTitle>Available Research Projects</DialogTitle>
+                            <DialogDescription>
+                              Explore ongoing research projects and find opportunities to collaborate
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="grid gap-4 py-4">
+                            {projects.map((project, index) => (
+                              <Card key={index} className="p-4">
+                                <div className="flex items-start gap-4">
+                                  <div className="p-2 bg-primary/10 rounded-lg">
+                                    <project.icon className="h-8 w-8 text-primary" />
+                                  </div>
+                                  <div className="flex-1 space-y-2">
+                                    <h3 className="font-semibold">{project.title}</h3>
+                                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                                    <div className="flex items-center gap-2 text-sm">
+                                      <span className="font-medium">Lead:</span>
+                                      <span>{project.lead}</span>
+                                      <span className="font-medium ml-4">Institution:</span>
+                                      <span>{project.institution}</span>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                      {project.tags.map((tag, tagIndex) => (
+                                        <span
+                                          key={tagIndex}
+                                          className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-full"
+                                        >
+                                          {tag}
+                                        </span>
+                                      ))}
+                                    </div>
+                                    <div className="flex items-center justify-between mt-4">
+                                      <span className="text-sm text-muted-foreground">
+                                        {project.openings} positions available
+                                      </span>
+                                      <Button size="sm">Apply Now</Button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Card>
+                            ))}
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </Card>
                 </div>
