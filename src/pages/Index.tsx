@@ -5,8 +5,11 @@ import { UserPlus, Search, MessageSquare, BookOpen, Clock, Users, ArrowRight } f
 import ProfileCard from "@/components/ProfileCard";
 import ExploreSection from "@/components/ExploreSection";
 import UserMenu from "@/components/UserMenu";
+import { useState } from "react";
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState("explore");
+
   return (
     <div className="container mx-auto px-4 py-6 min-h-screen pb-20">
       <header className="mb-8 flex justify-between items-center">
@@ -19,7 +22,7 @@ const Index = () => {
         <UserMenu />
       </header>
 
-      <Tabs defaultValue="explore" className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsContent value="explore">
           <ExploreSection />
         </TabsContent>
@@ -148,11 +151,9 @@ const Index = () => {
             </CardContent>
           </Card>
         </TabsContent>
-      </Tabs>
 
-      {/* Floating Navigation Footer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-t p-2 shadow-lg">
-        <Tabs defaultValue="explore">
+        {/* Floating Navigation Footer */}
+        <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-t p-2 shadow-lg">
           <TabsList className="grid w-full grid-cols-4 max-w-md mx-auto">
             <TabsTrigger value="explore" className="flex flex-col gap-1 items-center py-2">
               <Search className="h-5 w-5" />
@@ -171,8 +172,8 @@ const Index = () => {
               <span className="text-xs">Projects</span>
             </TabsTrigger>
           </TabsList>
-        </Tabs>
-      </div>
+        </div>
+      </Tabs>
     </div>
   );
 };

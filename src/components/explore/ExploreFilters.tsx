@@ -63,11 +63,11 @@ const ExploreFilters = ({
                 id={faculty}
                 checked={selectedFaculties.includes(faculty)}
                 onCheckedChange={(checked) => {
-                  setSelectedFaculties(prev =>
-                    checked
-                      ? [...prev, faculty]
-                      : prev.filter(f => f !== faculty)
-                  );
+                  if (checked) {
+                    setSelectedFaculties([...selectedFaculties, faculty]);
+                  } else {
+                    setSelectedFaculties(selectedFaculties.filter(f => f !== faculty));
+                  }
                 }}
               />
               <Label htmlFor={faculty} className="text-sm">{faculty}</Label>
