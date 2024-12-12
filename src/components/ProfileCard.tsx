@@ -1,12 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Quote, Hash } from "lucide-react";
+import { BookOpen, Quote, Hash, MapPin } from "lucide-react";
 
 interface ProfileCardProps {
   name: string;
   title: string;
   institution: string;
+  location: string;
   interests: string[];
   imageUrl?: string;
   scholarMetrics?: {
@@ -19,7 +20,8 @@ interface ProfileCardProps {
 const ProfileCard = ({ 
   name, 
   title, 
-  institution, 
+  institution,
+  location, 
   interests, 
   imageUrl,
   scholarMetrics 
@@ -37,6 +39,10 @@ const ProfileCard = ({
           </CardTitle>
           <p className="text-sm font-medium text-muted-foreground">{title}</p>
           <p className="text-sm text-muted-foreground/80">{institution}</p>
+          <p className="text-sm text-muted-foreground/70 flex items-center gap-1">
+            <MapPin className="h-3 w-3" />
+            {location}
+          </p>
         </div>
       </CardHeader>
       <CardContent>
