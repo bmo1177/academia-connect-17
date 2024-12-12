@@ -17,16 +17,26 @@ import NotificationsDialog from "./dialogs/NotificationsDialog";
 
 const UserMenu = () => {
   const [activeDialog, setActiveDialog] = useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const closeDialog = () => setActiveDialog(null);
+  const closeDialog = () => {
+    setActiveDialog(null);
+    setIsDropdownOpen(false);
+  };
+
+  const handleMenuItemClick = (dialogName: string) => {
+    setActiveDialog(dialogName);
+    setIsDropdownOpen(false);
+  };
 
   const handleLogoutClick = () => {
     console.log("Logout user");
+    setIsDropdownOpen(false);
   };
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-10 w-10 rounded-full">
             <Avatar>
@@ -38,19 +48,19 @@ const UserMenu = () => {
         <DropdownMenuContent className="w-56" align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setActiveDialog("profile")}>
+          <DropdownMenuItem onClick={() => handleMenuItemClick("profile")}>
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setActiveDialog("settings")}>
+          <DropdownMenuItem onClick={() => handleMenuItemClick("settings")}>
             <Settings className="mr-2 h-4 w-4" />
             <span>Settings</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setActiveDialog("publications")}>
+          <DropdownMenuItem onClick={() => handleMenuItemClick("publications")}>
             <BookOpen className="mr-2 h-4 w-4" />
             <span>Publications</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setActiveDialog("notifications")}>
+          <DropdownMenuItem onClick={() => handleMenuItemClick("notifications")}>
             <Bell className="mr-2 h-4 w-4" />
             <span>Notifications</span>
           </DropdownMenuItem>
