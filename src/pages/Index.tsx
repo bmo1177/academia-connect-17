@@ -8,7 +8,7 @@ import UserMenu from "@/components/UserMenu";
 
 const Index = () => {
   return (
-    <div className="container mx-auto px-4 py-6 min-h-screen">
+    <div className="container mx-auto px-4 py-6 min-h-screen pb-20">
       <header className="mb-8 flex justify-between items-center">
         <div>
           <h1 className="text-4xl font-bold text-center mb-4">Academia Connect</h1>
@@ -20,25 +20,6 @@ const Index = () => {
       </header>
 
       <Tabs defaultValue="explore" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 mb-8">
-          <TabsTrigger value="explore" className="flex gap-2 items-center">
-            <Search className="h-4 w-4" />
-            Explore
-          </TabsTrigger>
-          <TabsTrigger value="connections" className="flex gap-2 items-center">
-            <UserPlus className="h-4 w-4" />
-            Connect
-          </TabsTrigger>
-          <TabsTrigger value="messages" className="flex gap-2 items-center">
-            <MessageSquare className="h-4 w-4" />
-            Messages
-          </TabsTrigger>
-          <TabsTrigger value="projects" className="flex gap-2 items-center">
-            <BookOpen className="h-4 w-4" />
-            Projects
-          </TabsTrigger>
-        </TabsList>
-
         <TabsContent value="explore">
           <ExploreSection />
         </TabsContent>
@@ -85,6 +66,28 @@ const Index = () => {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Floating Navigation Footer */}
+      <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-t p-2 shadow-lg">
+        <TabsList className="grid w-full grid-cols-4 max-w-md mx-auto">
+          <TabsTrigger value="explore" className="flex flex-col gap-1 items-center py-2">
+            <Search className="h-5 w-5" />
+            <span className="text-xs">Explore</span>
+          </TabsTrigger>
+          <TabsTrigger value="connections" className="flex flex-col gap-1 items-center py-2">
+            <UserPlus className="h-5 w-5" />
+            <span className="text-xs">Connect</span>
+          </TabsTrigger>
+          <TabsTrigger value="messages" className="flex flex-col gap-1 items-center py-2">
+            <MessageSquare className="h-5 w-5" />
+            <span className="text-xs">Messages</span>
+          </TabsTrigger>
+          <TabsTrigger value="projects" className="flex flex-col gap-1 items-center py-2">
+            <BookOpen className="h-5 w-5" />
+            <span className="text-xs">Projects</span>
+          </TabsTrigger>
+        </TabsList>
+      </div>
     </div>
   );
 };
