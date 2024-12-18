@@ -12,6 +12,32 @@ import {
 import ExploreFilters from "./explore/ExploreFilters";
 import FeaturedProjects from "./explore/FeaturedProjects";
 import { mockProfiles } from "@/data/mockProfiles";
+import { BookOpen, Code2, Hospital, Building2, Brain, Database, Calendar, Globe } from "lucide-react";
+
+const getIconForInterest = (interests: string[]) => {
+  if (interests.some(i => i.toLowerCase().includes('health') || i.toLowerCase().includes('medical'))) {
+    return Hospital;
+  }
+  if (interests.some(i => i.toLowerCase().includes('computer') || i.toLowerCase().includes('software'))) {
+    return Code2;
+  }
+  if (interests.some(i => i.toLowerCase().includes('data'))) {
+    return Database;
+  }
+  if (interests.some(i => i.toLowerCase().includes('education'))) {
+    return BookOpen;
+  }
+  if (interests.some(i => i.toLowerCase().includes('neuroscience') || i.toLowerCase().includes('cognitive'))) {
+    return Brain;
+  }
+  if (interests.some(i => i.toLowerCase().includes('architecture') || i.toLowerCase().includes('urban'))) {
+    return Building2;
+  }
+  if (interests.some(i => i.toLowerCase().includes('schedule') || i.toLowerCase().includes('time'))) {
+    return Calendar;
+  }
+  return Globe; // default icon
+};
 
 const ExploreSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -71,17 +97,20 @@ const ExploreSection = () => {
       />
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filteredProfiles.map((profile, index) => (
-          <Card key={index} className="overflow-hidden">
-            <CardContent className="p-0">
-              <ProfileCard {...profile} />
-              <div className="flex justify-between p-4 bg-muted/50">
-                <Button variant="outline">Not Now</Button>
-                <Button onClick={() => handleConnect(profile)}>Connect</Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+        {filteredProfiles.map((profile, index) => {
+          const IconComponent = getIconForInterest(profile.interests);
+          return (
+            <Card key={index} className="overflow-hidden">
+              <CardContent className="p-0">
+                <ProfileCard {...profile} IconComponent={IconComponent} />
+                <div className="flex justify-between p-4 bg-muted/50">
+                  <Button variant="outline">Not Now</Button>
+                  <Button onClick={() => handleConnect(profile)}>Connect</Button>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
       <FeaturedProjects />

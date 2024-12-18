@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Quote, Hash, MapPin } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface ProfileCardProps {
   name: string;
@@ -10,6 +11,7 @@ interface ProfileCardProps {
   location: string;
   interests: string[];
   imageUrl?: string;
+  IconComponent?: LucideIcon;
   scholarMetrics?: {
     citations: number;
     hIndex: number;
@@ -24,14 +26,25 @@ const ProfileCard = ({
   location, 
   interests, 
   imageUrl,
+  IconComponent,
   scholarMetrics 
 }: ProfileCardProps) => {
   return (
     <Card className="w-full max-w-md mx-auto hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 border-2">
       <CardHeader className="flex flex-row items-center gap-4 pb-6">
         <Avatar className="h-20 w-20 ring-2 ring-primary/20 ring-offset-2">
-          <AvatarImage src={imageUrl} alt={name} />
-          <AvatarFallback className="bg-primary/5 text-lg">{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+          {IconComponent ? (
+            <div className="w-full h-full flex items-center justify-center bg-primary/10">
+              <IconComponent className="h-10 w-10 text-primary/70" />
+            </div>
+          ) : (
+            <>
+              <AvatarImage src={imageUrl} alt={name} />
+              <AvatarFallback className="bg-primary/5 text-lg">
+                {name.split(' ').map(n => n[0]).join('')}
+              </AvatarFallback>
+            </>
+          )}
         </Avatar>
         <div className="space-y-1">
           <CardTitle className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
