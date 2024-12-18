@@ -1,48 +1,23 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserPlus, Search, MessageSquare, BookOpen, ArrowRight, Users, Clock, Lock } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import ProfileCard from "@/components/ProfileCard";
-import ExploreSection from "@/components/ExploreSection";
+import { Search, UserPlus, MessageSquare, BookOpen } from "lucide-react";
 import UserMenu from "@/components/UserMenu";
-import CreateProjectDialog from "@/components/dialogs/CreateProjectDialog";
+import ExploreSection from "@/components/ExploreSection";
 import MessagesTab from "@/components/messages/MessagesTab";
+import ProjectsGrid from "@/components/ProjectsGrid";
 import { useState } from "react";
-
-// Mock projects data
-const projects = [
-  {
-    title: "Climate Change Impact Study",
-    description: "Research on global climate patterns and their effects on ecosystems",
-    lead: "Dr. Sarah Johnson",
-    institution: "Stanford University",
-    tags: ["Climate Science", "Environmental Studies", "Data Analysis"],
-    openings: 3,
-    icon: BookOpen
-  },
-  {
-    title: "Quantum Computing Research",
-    description: "Development of quantum algorithms for optimization problems",
-    lead: "Prof. Michael Chen",
-    institution: "MIT",
-    tags: ["Quantum Physics", "Computer Science", "Mathematics"],
-    openings: 2,
-    icon: BookOpen
-  }
-];
+import CreateProjectDialog from "@/components/dialogs/CreateProjectDialog";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("explore");
+  const [activeTab, setActiveTab] = useState("projects");
   const [showCreateProjectDialog, setShowCreateProjectDialog] = useState(false);
 
   return (
     <div className="container mx-auto px-4 py-6 min-h-screen pb-20">
       <header className="mb-8 flex justify-between items-center">
         <div>
-          <h1 className="text-4xl font-bold text-center mb-4">Consortio</h1>
+          <h1 className="text-4xl font-bold text-center mb-4">Département Informatique</h1>
           <p className="text-center text-muted-foreground">
-            Global teams for global solutions
+            Liste des PFE - Année Universitaire 2024/2025
           </p>
         </div>
         <UserMenu />
@@ -103,106 +78,7 @@ const Index = () => {
         </TabsContent>
 
         <TabsContent value="projects">
-          <Card>
-            <CardHeader>
-              <CardTitle>Research Projects</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-medium leading-none">Your Projects</h4>
-                    <p className="text-sm text-muted-foreground">Manage your research projects and collaborations</p>
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => setShowCreateProjectDialog(true)}
-                  >
-                    Create Project <BookOpen className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <Card className="p-6">
-                    <div className="flex flex-col items-center space-y-4">
-                      <BookOpen className="h-12 w-12 text-muted-foreground/50" />
-                      <h3 className="text-lg font-semibold">Start a New Project</h3>
-                      <p className="text-sm text-center text-muted-foreground">
-                        Create a research project and invite collaborators
-                      </p>
-                      <Button 
-                        className="w-full"
-                        onClick={() => setShowCreateProjectDialog(true)}
-                      >
-                        Create Project
-                      </Button>
-                    </div>
-                  </Card>
-
-                  <Card className="p-6">
-                    <div className="flex flex-col items-center space-y-4">
-                      <Users className="h-12 w-12 text-muted-foreground/50" />
-                      <h3 className="text-lg font-semibold">Join Projects</h3>
-                      <p className="text-sm text-center text-muted-foreground">
-                        Discover and join ongoing research projects
-                      </p>
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button variant="outline" className="w-full">Browse Projects</Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
-                          <DialogHeader>
-                            <DialogTitle>Available Research Projects</DialogTitle>
-                            <DialogDescription>
-                              Explore ongoing research projects and find opportunities to collaborate
-                            </DialogDescription>
-                          </DialogHeader>
-                          <div className="grid gap-4 py-4">
-                            {projects.map((project, index) => (
-                              <Card key={index} className="p-4">
-                                <div className="flex items-start gap-4">
-                                  <div className="p-2 bg-primary/10 rounded-lg">
-                                    <project.icon className="h-8 w-8 text-primary" />
-                                  </div>
-                                  <div className="flex-1 space-y-2">
-                                    <h3 className="font-semibold">{project.title}</h3>
-                                    <p className="text-sm text-muted-foreground">{project.description}</p>
-                                    <div className="flex items-center gap-2 text-sm">
-                                      <span className="font-medium">Lead:</span>
-                                      <span>{project.lead}</span>
-                                      <span className="font-medium ml-4">Institution:</span>
-                                      <span>{project.institution}</span>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2">
-                                      {project.tags.map((tag, tagIndex) => (
-                                        <span
-                                          key={tagIndex}
-                                          className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-full"
-                                        >
-                                          {tag}
-                                        </span>
-                                      ))}
-                                    </div>
-                                    <div className="flex items-center justify-between mt-4">
-                                      <span className="text-sm text-muted-foreground">
-                                        {project.openings} positions available
-                                      </span>
-                                      <Button size="sm">Apply Now</Button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </Card>
-                            ))}
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  </Card>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <ProjectsGrid />
         </TabsContent>
 
         {/* Floating Navigation Footer */}
