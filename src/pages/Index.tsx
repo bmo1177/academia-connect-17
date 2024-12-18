@@ -1,5 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, UserPlus, MessageSquare, BookOpen } from "lucide-react";
+import { Search, UserPlus, MessageSquare, BookOpen, ArrowRight, Users, Clock } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import UserMenu from "@/components/UserMenu";
 import ExploreSection from "@/components/ExploreSection";
 import MessagesTab from "@/components/messages/MessagesTab";
